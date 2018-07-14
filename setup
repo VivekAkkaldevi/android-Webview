@@ -1,0 +1,46 @@
+// webview setuping 
+//xml layout
+
+<WebView  xmlns:android="http://schemas.android.com/apk/res/android"
+   android:id="@+id/webview"
+   android:layout_width="fill_parent"
+   android:layout_height="fill_parent"
+/>
+
+
+// Main Activity.java
+
+String url  = "https://www.google.com";
+
+Webview wb = (Webview)findViewById(R.id.webview);
+
+wb.getSetting.setJavaScriptEnabled(true);
+wb.getSettings().setLoadsImagesAutomatically(true);
+wb.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+wb.setWebViewClient(new MyBrowser());
+wb.setWebViewClient(new WebViewClient());
+wb.getSettings().setBuiltInZoomControls(true);
+wb.loadUrl(url);
+wb.canGoBack();
+wb.clearHistory();
+wb.clearFormData();
+wb.clearMatches();
+wb.clearCache();
+
+private class MyBrowser extends WebViewClient {
+      @Override
+      public boolean shouldOverrideUrlLoading(WebView view, String url) {
+         view.loadUrl(url);
+         return true;
+      }
+   }
+   
+   @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK) && this.webView.canGoBack()) {
+            this.webview.goBack();
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
